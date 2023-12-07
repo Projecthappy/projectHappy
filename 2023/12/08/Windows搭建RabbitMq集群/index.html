@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title>Windows搭建RabbitMq集群 - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="[toc]
+
+一、简述&amp;ensp;&amp;ensp;RabbitMQ 在 Linux 端的集群搭建可参考的教程很多，但 windows 端的相对较少，虽然生产环境肯定还是要在 Linux 上整的，但是本着,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +59,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle">Windows搭建RabbitMq集群</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,22 +91,22 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/Windows%E6%90%AD%E5%BB%BARabbitMq%E9%9B%86%E7%BE%A4/" title="Windows搭建RabbitMq集群" class="">Windows搭建RabbitMq集群</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    7.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    7 mins.
                 </span>
                 
                 
@@ -136,19 +138,34 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <p>[toc]</p>
+<hr>
+<h1 id="一、简述"><a href="#一、简述" class="headerlink" title="一、简述"></a>一、简述</h1><p>&ensp;&ensp;RabbitMQ 在 Linux 端的集群搭建可参考的教程很多，但 windows 端的相对较少，虽然生产环境肯定还是要在 Linux 上整的，但是本着不整好不痛快的精神，参考了好几篇博客，踩了一些坑，终于搭好了。😆😆😆</p>
+<h1 id="二、步骤"><a href="#二、步骤" class="headerlink" title="二、步骤"></a>二、步骤</h1><p>集群包括一个主节点，两个从节点，以下是操作步骤</p>
+<ol>
+<li><p>打开 windows 命令提示符，注意不是 powershell(后续需要在这个终端设置变量)<br><img src="/image/Windows%E6%90%AD%E5%BB%BARabbitMq%E9%9B%86%E7%BE%A4/1687607312573.png" alt="1687607312573"></p>
+</li>
+<li><p>新建三个命令提示符，每个终端负责每个节点的环境配置和启动，在每个命令提示符中依次执行设置环境变量，启动节点的命令。<br><code>第一、三行命令中的值是端口号，第二行的值是节点名称，可以根据需求更改</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置主节点</span></span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODE_PORT=5673</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODENAME=master</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_SERVER_START_ARGS=-rabbitmq_management listener [&#123;port,15673&#125;]</span><br><span class="line">rabbitmq-server.bat</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置从1节点</span></span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODE_PORT=5674</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODENAME=slave1</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_SERVER_START_ARGS=-rabbitmq_management listener [&#123;port,15674&#125;]</span><br><span class="line">rabbitmq-server.bat</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置从2节点</span></span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODE_PORT=5675</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_NODENAME=slave2</span><br><span class="line"><span class="built_in">set</span> RABBITMQ_SERVER_START_ARGS=-rabbitmq_management listener [&#123;port,15675&#125;]</span><br><span class="line">rabbitmq-server.bat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个终端，在终端内停止每个节点的运行并重置每个节点(防止创建集群时出现不同步等问题)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat -n master stop_app</span><br><span class="line">rabbitmqctl.bat -n master reset</span><br><span class="line"></span><br><span class="line">rabbitmqctl.bat -n slave1 stop_app</span><br><span class="line">rabbitmqctl.bat -n slave1 reset</span><br><span class="line"></span><br><span class="line">rabbitmqctl.bat -n slave2 stop_app</span><br><span class="line">rabbitmqctl.bat -n slave2 reset</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动主节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat -n master start_app</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从节点挂载到主节点下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat -n slave1 join_cluster master@workMachine</span><br><span class="line">rabbitmqctl.bat -n slave2 join_cluster master@workMachine</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动从节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl.bat -n slave1 start_app</span><br><span class="line">rabbitmqctl.bat -n slave2 start_app</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h1><p>这时再进入主节点的控制界面就可以看到三个节点都在线了<br><img src="/image/Windows%E6%90%AD%E5%BB%BARabbitMq%E9%9B%86%E7%BE%A4/1687607211343.png" alt="1687607211343"><br>通过命令<code>rabbitmqctl.bat cluster_status -n master</code>也可以看到三个节点的运行状况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\hahaha&gt; rabbitmqctl.bat cluster_status -n master</span><br><span class="line">Cluster status of node master@workMachine ...</span><br><span class="line">Basics</span><br><span class="line"></span><br><span class="line">Cluster name: master@workMachine</span><br><span class="line">Total CPU cores available cluster-wide: 48</span><br><span class="line"></span><br><span class="line">Disk Nodes</span><br><span class="line"></span><br><span class="line">master@workMachine</span><br><span class="line">slave1@workMachine</span><br><span class="line">slave2@workMachine</span><br><span class="line"></span><br><span class="line">Running Nodes</span><br><span class="line"></span><br><span class="line">master@workMachine</span><br><span class="line">slave1@workMachine</span><br><span class="line">slave2@workMachine</span><br><span class="line"></span><br><span class="line">Versions</span><br><span class="line"></span><br><span class="line">master@workMachine: RabbitMQ 3.12.0 on Erlang 26.0.1</span><br><span class="line">slave1@workMachine: RabbitMQ 3.12.0 on Erlang 26.0.1</span><br><span class="line">slave2@workMachine: RabbitMQ 3.12.0 on Erlang 26.0.1</span><br><span class="line"></span><br><span class="line">CPU Cores</span><br><span class="line"></span><br><span class="line">Node: master@workMachine, available CPU cores: 16</span><br><span class="line">Node: slave1@workMachine, available CPU cores: 16</span><br><span class="line">Node: slave2@workMachine, available CPU cores: 16</span><br></pre></td></tr></table></figure>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -207,7 +224,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%80%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、简述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">二、步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E6%88%90"><span class="toc-number">3.</span> <span class="toc-text">完成</span></a></li></ol>
                 </div>
             </div>
             

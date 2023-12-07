@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>并发编程 - 铛铛</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="[Toc]
+
+一、内容整理多线程基础线程和进程的区别？当系统从磁盘中将硬盘中的某个程序代码到内存，就开启了一个进程，一个进程可以有多个线程，线程由一条一条的指令组成
+进程是运行中程序的实例，包含了线,"> 
+    <meta name="author" content="孙冬冬"> 
+    <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">铛铛</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">并发编程</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
+                
+                十二月 08, 2023
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="并发编程" class="">并发编程</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    7.7k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    7 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>[Toc]</p>
+<hr>
+<h1 id="一、内容整理"><a href="#一、内容整理" class="headerlink" title="一、内容整理"></a>一、内容整理</h1><h2 id="多线程基础"><a href="#多线程基础" class="headerlink" title="多线程基础"></a>多线程基础</h2><h4 id="线程和进程的区别？"><a href="#线程和进程的区别？" class="headerlink" title="线程和进程的区别？"></a>线程和进程的区别？</h4><p>当系统从磁盘中将硬盘中的某个程序代码到内存，就开启了一个进程，一个进程可以有多个线程，线程由一条一条的指令组成</p>
+<p>进程是运行中程序的实例，包含了线程，以便同时执行多个任务<br>进程间的内存空间不是共享的，但线程中的空间对进程中的线程是共享的<br>线程更轻量，上下文切换的成本比进程更低</p>
+<h4 id="并行和并发有什么区别？"><a href="#并行和并发有什么区别？" class="headerlink" title="并行和并发有什么区别？"></a>并行和并发有什么区别？</h4><p>并发是不同的线程以极短的时间在 cpu 中交替执行<br>并行是多个线程在不同的 cpu 核心中执行<br>并行是同时执行多个任务的能力，并发是可以应对多个任务的能力</p>
+<h4 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h4><ul>
+<li>继承<code>Thread</code>类，重写 <code>run</code> 方法</li>
+<li>实现 <code>Runnable</code> 接口，实现 <code>run</code> 方法</li>
+<li>实现 <code>Callable</code> 接口，实现 <code>call</code> 方法</li>
+<li>使用线程池创建线程</li>
+</ul>
+<h4 id="runnable-和-callable-有什么区别"><a href="#runnable-和-callable-有什么区别" class="headerlink" title="runnable 和 callable 有什么区别"></a>runnable 和 callable 有什么区别</h4><ul>
+<li>Runnable 接口的方法没有返回值，Callable 接口可以有返回值，通过 FutureTask 中的 get 方法获取异步执行的返回值，但执行这个方法会阻塞主进程</li>
+<li>Runnable 不能抛出异常，Callable 可以抛出异常</li>
+</ul>
+<h4 id="线程的-run-和-start-有什么区别？"><a href="#线程的-run-和-start-有什么区别？" class="headerlink" title="线程的 run()和 start()有什么区别？"></a>线程的 run()和 start()有什么区别？</h4><ul>
+<li>run 只是调用普通方法，可以多次执行</li>
+<li>start 方法会启动线程，会调用 native 的 start0 方法，只能调用一次</li>
+</ul>
+<h4 id="线程包括哪些状态，状态之间是如何变化的"><a href="#线程包括哪些状态，状态之间是如何变化的" class="headerlink" title="线程包括哪些状态，状态之间是如何变化的"></a>线程包括哪些状态，状态之间是如何变化的</h4><ul>
+<li>New</li>
+<li>Runnable</li>
+<li>Blocked</li>
+<li>Waitting</li>
+<li>TimeWaitting</li>
+<li>Terminated</li>
+</ul>
+<p>创建线程时时 New 状态，调用 start 方法后会进入 Runnable 状态，Runnable 状态中会根据争抢 cpu 时间片的情况会在就绪和运行状态来回切换，如果出现需要等待锁，会进入 Blocked 状态，拿到锁后再次变成 Runnable 状态，线程中调用了 wait 方法时会进入 Waitting 状态，调用 notify 或者 notifyAll 方法后，线程被唤醒，进入 Runnable 状态，运行中遇到 sleep 会进入 TimeWaitting 状态，执行完毕或线程死亡后会进入 Terminated 状态。</p>
+<h4 id="新建-T1、T2、T3-三个线程，如何保证它们按顺序执行？"><a href="#新建-T1、T2、T3-三个线程，如何保证它们按顺序执行？" class="headerlink" title="新建 T1、T2、T3 三个线程，如何保证它们按顺序执行？"></a>新建 T1、T2、T3 三个线程，如何保证它们按顺序执行？</h4><p>在 t2 中调用 t1 的 join 方法，在 t3 中调用 t2 的 join 方法</p>
+<h4 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify()和 notifyAll()有什么区别？"></a>notify()和 notifyAll()有什么区别？</h4><p>notify 只会随机唤醒一个线程，notifyAll 会唤醒所有的线程</p>
+<h4 id="在-java-中-wait-和-sleep-方法的不同？"><a href="#在-java-中-wait-和-sleep-方法的不同？" class="headerlink" title="在 java 中 wait 和 sleep 方法的不同？"></a>在 java 中 wait 和 sleep 方法的不同？</h4><ul>
+<li>wait 是 Object 类中的方法，可以被唤醒，必须先获取 wait 对象的锁，会释放锁，</li>
+<li>sleep 是 Thread 中的静态方法，不可以被唤醒， 不会释放锁</li>
+</ul>
+<h4 id="如何停止一个正在运行的线程？"><a href="#如何停止一个正在运行的线程？" class="headerlink" title="如何停止一个正在运行的线程？"></a>如何停止一个正在运行的线程？</h4><p>使用线程的 interrupt 方法</p>
+<h2 id="线程中并发锁"><a href="#线程中并发锁" class="headerlink" title="线程中并发锁"></a>线程中并发锁</h2><h4 id="讲一下-synchronized-关键字的底层原理？"><a href="#讲一下-synchronized-关键字的底层原理？" class="headerlink" title="讲一下 synchronized 关键字的底层原理？"></a>讲一下 synchronized 关键字的底层原理？</h4><p>底层是由 Monitor 实现的，Moniter 是用 C++编写的，进入 synchronized 方法块时，对象锁会先关联 Monitor，Monitor 中存在三个属性，owner：持有锁的线程、entrylist：处于阻塞状态的线程 和 waitset 处于 waitting 状态的线程</p>
+<h4 id="synchronized-关键字的底层原理-进阶"><a href="#synchronized-关键字的底层原理-进阶" class="headerlink" title="synchronized 关键字的底层原理-进阶"></a>synchronized 关键字的底层原理-进阶</h4><h4 id="你谈谈-JMM（Java-内存模型）"><a href="#你谈谈-JMM（Java-内存模型）" class="headerlink" title="你谈谈 JMM（Java 内存模型）"></a>你谈谈 JMM（Java 内存模型）</h4><p>是 java 虚拟机规范中定义的一种内存模型，每个线程中都有自己的工作内存，线程之间无法互相访问，共享的变量存放在主内存中，线程工作时，需要用到共享变量的话会在自己的工作内存中创建一个共享变量的副本，线程只能操作自己工作内存中的副本，由 JMM 负责将副本同步到共享内存和将共享变量加载到线程的工作内存中</p>
+<h4 id="CAS-你知道吗？"><a href="#CAS-你知道吗？" class="headerlink" title="CAS 你知道吗？"></a>CAS 你知道吗？</h4><p>比较并交换，保证操作的原子性，比较旧的值相同才会将旧的值更改为新的值，CAS 中包含自旋锁，是一种乐观锁，发现旧值不相同时会不断地重置，CAS 的底层时使用 Unsafe 类中的 native 方法，</p>
+<h4 id="请谈谈你对-volatile-的理解"><a href="#请谈谈你对-volatile-的理解" class="headerlink" title="请谈谈你对 volatile 的理解"></a>请谈谈你对 volatile 的理解</h4><ul>
+<li>保证可见性：保证不同线程对变量操作的可见性，会强制将对副本修改的值立刻同步到主存中，其目的时防止 JIT 编译器对代码进行优化</li>
+<li>防止指令重排：在变量的操作中加入屏障，防止其他的写操作到该变量写下面，防止其他读的操作到该变量读上面</li>
+</ul>
+<h4 id="什么是-AQS？"><a href="#什么是-AQS？" class="headerlink" title="什么是 AQS？"></a>什么是 AQS？</h4><p>抽象同步队列，是构建锁和同步组件的基础框架，包含了锁的状态，拿到锁的线程，等待队列的头节点和尾节点，时一种非公平锁</p>
+<h4 id="ReentrantLock-的实现原理"><a href="#ReentrantLock-的实现原理" class="headerlink" title="ReentrantLock 的实现原理"></a>ReentrantLock 的实现原理</h4><p>是由 CAS 和 AQS 实现的，它支持公平锁和非公平锁</p>
+<h4 id="synchronized-和-Lock-有什么区别"><a href="#synchronized-和-Lock-有什么区别" class="headerlink" title="synchronized 和 Lock 有什么区别"></a>synchronized 和 Lock 有什么区别</h4><p>synchronized 是关键字，由 c++实现，lock 是接口，由 java 语言实现<br>Lock 支持更细粒度的锁控制，功能更多，支持公平锁，可打断，可超时，多条件变量，有多种不同的实现</p>
+<h4 id="死锁产生的条件以及死锁排查方案"><a href="#死锁产生的条件以及死锁排查方案" class="headerlink" title="死锁产生的条件以及死锁排查方案"></a>死锁产生的条件以及死锁排查方案</h4><p>线程中同时获取多把锁的情况，jps 获取线程的 PID，再用 jstack 获取线程的运行情况</p>
+<h4 id="聊一下-ConcurrentHashMap"><a href="#聊一下-ConcurrentHashMap" class="headerlink" title="聊一下 ConcurrentHashMap"></a>聊一下 ConcurrentHashMap</h4><p>是线程安全版本的 HashMap，数据结构和 HashMap 一样，它在空节点插入时是 CAS 的操作，在链表或者红黑树的节点是锁的头节点。</p>
+<h4 id="导致并发程序出现问题的根本原因是什么"><a href="#导致并发程序出现问题的根本原因是什么" class="headerlink" title="导致并发程序出现问题的根本原因是什么"></a>导致并发程序出现问题的根本原因是什么</h4><p>并发编程三大特性是</p>
+<ul>
+<li>原子性：线程要么执行要么不执行</li>
+<li>可见性：对数据副本的修改能及时同步到别的线程</li>
+<li>有序性：防止指令重排<br>违反了特性就可能产生问题</li>
+</ul>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h4 id="说一下线程池的核心参数（线程池的执行原理知道嘛）"><a href="#说一下线程池的核心参数（线程池的执行原理知道嘛）" class="headerlink" title="说一下线程池的核心参数（线程池的执行原理知道嘛）"></a>说一下线程池的核心参数（线程池的执行原理知道嘛）</h4><p>线程池有七大参数</p>
+<ul>
+<li>核心线程池数</li>
+<li>最大线程数</li>
+<li>非核心线程存活时间</li>
+<li>非核心线程存活时间单位</li>
+<li>阻塞队列</li>
+<li>线程工厂</li>
+<li>拒绝策略</li>
+</ul>
+<p>其中拒绝策略是达到最大先乘除，并且阻塞队列也满了的时候拒绝策略分为</p>
+<ul>
+<li>AbortPolicy：直接抛出异常，默认策略</li>
+<li>CallerRunsPolicy：用调用者所在的线程来执行任务</li>
+<li>DiscardOldestPolicy：丢弃阻塞队列中靠最前的任务，并执行当前任务</li>
+<li>DiscardPolicy：直接丢弃任务</li>
+</ul>
+<h4 id="线程池中有哪些常见的阻塞队列"><a href="#线程池中有哪些常见的阻塞队列" class="headerlink" title="线程池中有哪些常见的阻塞队列"></a>线程池中有哪些常见的阻塞队列</h4><p>常见的有 ArrayBlokingQueue 和 LinkedBlokingQueue<br>不同之处：</p>
+<ul>
+<li>ArrayBlokingQueue 是有界的，LinkedBlokingQueue 则是可以设置为无界</li>
+<li>ArrayBlokingQueue 只有一把锁，锁整个数组，而 LinkedBlokingQueue 有头节点和尾节点两把锁，相对来说加入和取出元素的时候 LinkedBlokingQueue 效率更高一些</li>
+</ul>
+<h4 id="如何确定核心线程数"><a href="#如何确定核心线程数" class="headerlink" title="如何确定核心线程数"></a>如何确定核心线程数</h4><ul>
+<li>高并发，任务时间短：N+1，可以减少上下文切换</li>
+<li>并发不高，任务时间较长<ul>
+<li>IO 密集型的任务使用 2N+1</li>
+<li>cpu 密集型使用 N+1</li>
+</ul>
+</li>
+</ul>
+<h4 id="为什么不建议用-Executors-创建线程池"><a href="#为什么不建议用-Executors-创建线程池" class="headerlink" title="为什么不建议用 Executors 创建线程池"></a>为什么不建议用 Executors 创建线程池</h4><p>记得 java 开发手册里这个是强制的，因为 Executors 创建的线程有最大线程数、阻塞队列的长度为 Integer.MAX_VALUE 的，可能会导致 OOM</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h4 id="线程池使用场景"><a href="#线程池使用场景" class="headerlink" title="线程池使用场景"></a>线程池使用场景</h4><ul>
+<li>使用 java 操作大量的数据的时候，操作全部可能导致 OOM，可以使用 CountDownLatch 和线程池分成一个一个的任务执行</li>
+<li>数据汇总，当一个接口需要多个远程调用时，可以将多个调用提交到线程池中同步执行，提高速度</li>
+<li>异步调用，一个接口值的返回不需要等某一个方法执行结束，比如搜索内容是，记录搜索记录和返回搜索结果，添加记录可以提交到线程池中异步执行</li>
+</ul>
+<h4 id="如何控制某个方法允许并发访问线程的数量"><a href="#如何控制某个方法允许并发访问线程的数量" class="headerlink" title="如何控制某个方法允许并发访问线程的数量"></a>如何控制某个方法允许并发访问线程的数量</h4><p>使用 Semaphore，保存的是一个信号量，进入线程的时候请求信号，信号量-1，只有信号量大于 0 才能请求成功，方法结束后，调用释放信号的方法，把信号量加回去。</p>
+<h2 id="谈谈你对-ThreadLocal-的理解"><a href="#谈谈你对-ThreadLocal-的理解" class="headerlink" title="谈谈你对 ThreadLocal 的理解"></a>谈谈你对 ThreadLocal 的理解</h2><p>ThreadLocal 是解决线程安全的一个操作类，将数据存储到各自线程中，有 set，get 和 remove 三个主要方法</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >留言</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>孙冬冬</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/TriDiamond" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/TriDiamond6" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/tridiamond?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">18 <p>文章</p></a></li>
+                    <li><a href="/categories">0 <p>分类</p></a></li>
+                    <li><a href="/tags">0 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%85%E5%AE%B9%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">一、内容整理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">多线程基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%B9%B6%E5%8F%91%E9%94%81"><span class="toc-number">1.2.</span> <span class="toc-text">线程中并发锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">1.3.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9-ThreadLocal-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.5.</span> <span class="toc-text">谈谈你对 ThreadLocal 的理解</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2023
+        <span class="gradient-text">
+            孙冬冬
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

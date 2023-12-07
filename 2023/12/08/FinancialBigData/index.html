@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title>FinancialBigData - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="学习笔记大数据 2001 孙啸冬
+1.爬取数据
+(1) 爬取时以股票代码作为 URL 中的参数传入，但遇到没有当前股票代码时 DOM 树的结构和正常的不一样，导致运行报错1解决方法：在爬取前先用re,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +59,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle">FinancialBigData</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,22 +91,22 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/FinancialBigData/" title="FinancialBigData" class="">FinancialBigData</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    5.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -136,19 +138,27 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+            <h1 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h1><h3 id="大数据-2001-孙啸冬"><a href="#大数据-2001-孙啸冬" class="headerlink" title="大数据 2001 孙啸冬"></a>大数据 2001 孙啸冬</h3><ul>
+<li>1.爬取数据<ul>
+<li>(1) 爬取时以股票代码作为 URL 中的参数传入，但遇到没有当前股票代码时 DOM 树的结构和正常的不一样，导致运行报错<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解决方法：在爬取前先用request库中的get方法获取URL的状态码，状态码为<span class="number">200</span>时再继续</span><br></pre></td></tr></table></figure></li>
+<li>(2) 爬取的页面中的数据是通过 js 渲染的，一开始爬取的发现表格只有表头没有内容<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">解决方法：用HTML_Session库</span><br><span class="line">//创建HTMLSession对象</span><br><span class="line">session = HTMLSession()</span><br><span class="line">//session设置URL</span><br><span class="line">first_page = session.get(url)</span><br><span class="line">//渲染<span class="number">0.5</span>s</span><br><span class="line">first_page.html.render(sleep=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure></li>
+<li>(3) 在爬取东方财富网中的数据时，每爬几个就会出现连接被断开的情况，寻找解决方法时想到了用 PowerAutomate 来自动化运行，流程如下图所示：当 vscode 运行窗口出现报错时将 Ctrl+Shift+F5 发送到 vscode 窗口重新运行<br><img src="/image/FinancialBigData/1680161235760.png" alt="1680161235760"></li>
+<li>(4) 通过<code>tushare</code>的 api 获取数据，将股票代码依次传入 api，在这个过程中碰到了一个问题是判断有没有返回的数据，使用<code>result==None</code>的话，返回正常的<code>DataFrame</code>的时候报错说不支持这样的操作，建议用<code>empty</code>方法判断是否为空，但是没有找到的画返回的又是<code>None</code>，最后用<code>isinstance</code>方法解决，返回对象是否是某类示例的 boolean 值<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isinstance</span>(tmp, pd.DataFrame)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>2.处理 JSON 数据<br>JSON 中的列表可以用列表表示，对象则可以用字典来表示，本次使用中最后直接把字典传入<code>json.dump</code>函数中即可<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;result.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">result = &#123;date: date <span class="keyword">for</span> date <span class="keyword">in</span> dates[<span class="number">1</span>:-<span class="number">1</span>]&#125;</span><br><span class="line"><span class="keyword">for</span> date <span class="keyword">in</span> dates[<span class="number">1</span>:-<span class="number">1</span>]:</span><br><span class="line">    b = a.get_group(date)</span><br><span class="line">    s = []</span><br><span class="line">    h = []</span><br><span class="line">    <span class="keyword">for</span> index, i <span class="keyword">in</span> b[b.<span class="built_in">type</span> == <span class="string">&#x27;深市&#x27;</span>].iterrows():</span><br><span class="line">        s.append([i[<span class="string">&quot;成交量&quot;</span>], i[<span class="string">&quot;净流出&quot;</span>], i[<span class="string">&#x27;code&#x27;</span>],  i[<span class="string">&#x27;name&#x27;</span>], <span class="string">&#x27;深市&#x27;</span>])</span><br><span class="line">    <span class="keyword">for</span> index, i <span class="keyword">in</span> b[b.<span class="built_in">type</span> == <span class="string">&#x27;沪市&#x27;</span>].iterrows():</span><br><span class="line">        h.append([i[<span class="string">&quot;成交量&quot;</span>], i[<span class="string">&quot;净流出&quot;</span>], i[<span class="string">&#x27;code&#x27;</span>],  i[<span class="string">&#x27;name&#x27;</span>], <span class="string">&#x27;沪市&#x27;</span>])<span class="number">1</span></span><br><span class="line">    result[date] = &#123;<span class="string">&quot;S&quot;</span>: s, <span class="string">&quot;H&quot;</span>: h&#125;</span><br><span class="line">json.dump(result, f, ensure_ascii=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></li>
+<li>3.vue 中的问题<ul>
+<li>(1) 动态图定时器<br>vue 中主要问题在最后动态的散点图中，我是想实现一个点击暂定，点击播放继续播放的效果，理想的实现方式是开始播放时创建定时器，点击停止时销毁定时器，根据文档，在<code>setOption</code>方法将图挂载到 DOM 后就设置定时器，这样的话第一次有效，问题是每次播放后都会再创建一个定时器，定时器中是否更改数据是根据绑定的<code>playing</code>决定的，如果<code>playing==true</code>才更改数据，从而使图表会有根据时间动态播放的效果。于是和往常一样在组件中定义一个变量<code>interval</code>，在挂在后调用初始化方法，在初始化时创建定时器并将值赋给<code>interval</code>，后面根据<code>playing</code>属性的改变创建和销毁定时器，但在实际中发现会有多个定时器同时在工作，多次点击日历后，会出现多个定时器以相隔很短的时间到达设定时间，散点图会出现抽风的情况，目前还未能解决。</li>
+<li>(2) 图表展示过后再回到前面的图表，控制台会有警告说当前画图的元素已经在 DOM 树上了，可是我看了下也没有在，只存在当前图标元素，可能和 UI 框架切换标签的逻辑有关，目前也还没有解决。</li>
+</ul>
+</li>
+<li>4.非技术问题<ul>
+<li>(1)审题不清：一开始没有看仔细导致后面发现还有缺的数据</li>
+<li>(2)沟通问题：爬数据和处理数据没有沟通好，导致后面字段不能很好理解</li>
+<li>(3)规划问题：分配好工作后大家都是按照自己的那部分切入，往往是遇到问题了再去解决，很多时候就只能放弃一些效果或者做了无用功，应该一开始就有大致的规划，需要哪些数据，画什么图，要怎样的效果，大家商量一些，有个较为细致的工作内容后再开始工作。</li>
+</ul>
+</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -207,7 +217,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE-2001-%E5%AD%99%E5%95%B8%E5%86%AC"><span class="toc-number">1.0.1.</span> <span class="toc-text">大数据 2001 孙啸冬</span></a></li></ol></li></ol></li></ol>
                 </div>
             </div>
             

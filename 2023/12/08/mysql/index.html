@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title>mysql - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="[Toc]
+
+一、内容整理优化1. 如何定位慢查询使用 skywalking 等工具，追踪分析接口的执行时长，使用 mysql 的慢查询日志
+2. sql 语句执行的很慢，如何分析使用 explan,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +60,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle">mysql</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,22 +92,22 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/mysql/" title="mysql" class="">mysql</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    3.8k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    3 mins.
                 </span>
                 
                 
@@ -136,19 +139,64 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+            <p>[Toc]</p>
+<hr>
+<h1 id="一、内容整理"><a href="#一、内容整理" class="headerlink" title="一、内容整理"></a>一、内容整理</h1><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h4 id="1-如何定位慢查询"><a href="#1-如何定位慢查询" class="headerlink" title="1. 如何定位慢查询"></a>1. 如何定位慢查询</h4><p>使用 skywalking 等工具，追踪分析接口的执行时长，使用 mysql 的慢查询日志</p>
+<h4 id="2-sql-语句执行的很慢，如何分析"><a href="#2-sql-语句执行的很慢，如何分析" class="headerlink" title="2. sql 语句执行的很慢，如何分析"></a>2. sql 语句执行的很慢，如何分析</h4><p>使用 explan 语句分析 sql 的执行计划，结果会展示走了哪个索引，索引长度走了多少，语句的优化建议等信息。</p>
+<h4 id="3-索引概念及索引底层数据结构"><a href="#3-索引概念及索引底层数据结构" class="headerlink" title="3. 索引概念及索引底层数据结构"></a>3. 索引概念及索引底层数据结构</h4><p>索引是 mysql 额外维护的一些数据，用于快速查找到数据，和排序数据，底层是 B+树，和 B-树相比，B+树每个数据都储存在叶子节点，并且数据之间使用前后指针相连，形成一个双向链表，便于对数据进行范围查询，查找效率也更稳定。</p>
+<h4 id="4-聚簇索引和非聚簇索引、回表查询"><a href="#4-聚簇索引和非聚簇索引、回表查询" class="headerlink" title="4. 聚簇索引和非聚簇索引、回表查询"></a>4. 聚簇索引和非聚簇索引、回表查询</h4><p>聚簇索引是指索引下的是一行的数据，非聚簇索引是指索引下的数据不是完整的一行，回表查询是指走了非聚集索引，但非聚集索引下的数据不完整，需要根据非聚集索引中的聚集索引再去聚集索引中找到完整的数据</p>
+<h4 id="5-覆盖索引、超大分页优化"><a href="#5-覆盖索引、超大分页优化" class="headerlink" title="5. 覆盖索引、超大分页优化"></a>5. 覆盖索引、超大分页优化</h4><p>索引覆盖是指，走非聚集索引，非聚集索引中包含了要查找的所有字段，因此不需要再回表查询，因此我们常常将经常查找的字段设为联合索引，超大分页优化是使用子查询，在子查询中查找到主键的范围，然后再去聚簇索引中查找对应的行，提高性能。</p>
+<h4 id="6-索引创建的原则"><a href="#6-索引创建的原则" class="headerlink" title="6. 索引创建的原则"></a>6. 索引创建的原则</h4><ul>
+<li>很长的字段作为索引时使用前缀索引</li>
+<li>对需要经常一起查询的数据创建联合索引</li>
+</ul>
+<h4 id="7-什么情况下索引会失效"><a href="#7-什么情况下索引会失效" class="headerlink" title="7. 什么情况下索引会失效"></a>7. 什么情况下索引会失效</h4><ul>
+<li>违反最左前缀法则</li>
+<li>索引字段出现条件右边的索引会失效</li>
+<li>出现字符串左边的模糊匹配</li>
+<li>在索引的字段上进行计算</li>
+<li>字符串没有加引号</li>
+</ul>
+<h4 id="8-谈一谈你对-sql-优化的经验"><a href="#8-谈一谈你对-sql-优化的经验" class="headerlink" title="8. 谈一谈你对 sql 优化的经验"></a>8. 谈一谈你对 sql 优化的经验</h4><ul>
+<li>建表时根据数据的实际情况使用适合的数据类型</li>
+<li>如果字段定长，使用固定长度 char 类型，相比于不定长效率会更高</li>
+<li>为经常一起查询的字段建立索引</li>
+<li>分库分表</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h4 id="1-事务的特性"><a href="#1-事务的特性" class="headerlink" title="1. 事务的特性"></a>1. 事务的特性</h4><ul>
+<li>A：原子性，一个事务是执行的最小单元</li>
+<li>C：一致性，要么全都执行成功，要么全部执行失败</li>
+<li>I：隔离性，别的事务的操作不会影响当前事务</li>
+<li>D：持久性，事务提交后对数据的更改是永久的</li>
+</ul>
+<h4 id="2-并发事务问题、隔离级别"><a href="#2-并发事务问题、隔离级别" class="headerlink" title="2. 并发事务问题、隔离级别"></a>2. 并发事务问题、隔离级别</h4><p>在并发事务中存在三个问题</p>
+<ul>
+<li>脏读，读取到了别的事务还没有提交的事务</li>
+<li>不可重复读，一个事务中两次读取到的同一条记录中有字段值不同</li>
+<li>幻读，查找时不存在这条记录，插入时却发现已经存在了这条记录</li>
+</ul>
+<p>为了解决这三个问题，事务又有四个不同的隔离级别</p>
+<ul>
+<li>读未提交，脏读、不可重复读和幻读都可能出现</li>
+<li>读已提交：只能避免脏读</li>
+<li>可重复读：可以避免脏读和不可重复读</li>
+<li>串行化：可以避免所有问题<br>mysql 默认的隔离级别时可重复读，这四个隔离级别中越往下数据安全性越高，但是性能越差</li>
+</ul>
+<h4 id="3-事务-undo-log-和-redo-log-的区别"><a href="#3-事务-undo-log-和-redo-log-的区别" class="headerlink" title="3. 事务-undo log 和 redo log 的区别"></a>3. 事务-undo log 和 redo log 的区别</h4><p>undo log 储存的是事务的回滚语句，比如事务中执行 delete，redo log 会生成 insert 语句。</p>
+<p>redo log 储存的是数据页的物理变化，mysql 直接操作的是内存中的缓冲池中的片，按照一定的频率同步到磁盘中，但有可能出现宕机，数据未同步到磁盘，造成数据丢失的情况，undo log 就是记录这种情况下的操作，数据库恢复时，读取 undo log 恢复未同步的数据</p>
+<h2 id="解释一下-mvcc"><a href="#解释一下-mvcc" class="headerlink" title="解释一下 mvcc"></a>解释一下 mvcc</h2><p>mvcc 是多版本并发控制，用于记录多个事务对数据的操作的版本，是的读操作和写操作没有冲突，主要由隐藏字段、undo log 和读视图组成 。</p>
+<ul>
+<li><p>隐藏字段：在每个表中mysql 会默认生成几个字段，包括了当前事务的 id，上一个版本的指针等信息。</p>
+</li>
+<li><p>undo log：存储版本数据，在内部会形成一个版本链，在多个事务并行操作某一行记录，记录不同事务修改数据的版本</p>
+</li>
+</ul>
+<p> readView 解决的是一个事务查询选择版本的问题，在内部定义了一些匹配规则和当前的一些事务 id 判断该访问那个版本的数据，不同的隔离级别快照读是不一样的，最终的访问的结果不一样。如果是 rc 隔离级别，每一次执行快照读时生成 ReadView，如果是 rr 隔离级别仅在事务中第一次执行快照读时生成 ReadView，后续复用</p>
+<h4 id="主从同步"><a href="#主从同步" class="headerlink" title="主从同步"></a>主从同步</h4><p>主库将 DML 和 DDL 生成 binlog 二进制文件，但不包括 selet 和 show 命令，然后从机获取主机中的 binlog，加载到从机的中间日志，从机读取中间日志，执行命令，完成同步</p>
+<h4 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h4><h1 id="二、面试题"><a href="#二、面试题" class="headerlink" title="二、面试题"></a>二、面试题</h1><ol>
+<li></li>
+<li></li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -207,7 +255,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%85%E5%AE%B9%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">一、内容整理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B-mvcc"><span class="toc-number">1.3.</span> <span class="toc-text">解释一下 mvcc</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">二、面试题</span></a></li></ol>
                 </div>
             </div>
             

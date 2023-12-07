@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title>记录SpringSecurity的一次实践 - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="[toc]
+前言&amp;ensp;&amp;ensp;在项目中需要有用户和管理员登录的功能，用户登陆后观看视频记录观看时长，起先那做的真的时太潦草了完全没有意识，user 一张表，admin 一张表，然后不同的 ,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +58,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle">记录SpringSecurity的一次实践</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,16 +90,16 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/%E8%AE%B0%E5%BD%95SpringSecurity%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/" title="记录SpringSecurity的一次实践" class="">记录SpringSecurity的一次实践</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    2.6k
                 </span>
                 
                 
@@ -136,20 +137,27 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <p>[toc]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&ensp;&ensp;在项目中需要有用户和管理员登录的功能，用户登陆后观看视频记录观看时长，起先那做的真的时太潦草了完全没有意识，user 一张表，admin 一张表，然后不同的 RequestMapping，后来猛然惊醒，那用户不是可以在不同地方一起登录，一起看视频刷多倍的时长了么，这可不行啊，后来百度了一大圈，最后决定还是用 springsecurity，其实也不是很确定用哪个，但是就感觉它主流一点?</p>
+<p>&ensp;&ensp;一开始看别人的博客的时候都是一头雾水，这怎么怎么就可以了，很少有对每个部分有详细的解释的，后来看了松哥的教程才渐渐的理解，链接：<a target="_blank" rel="noopener" href="http://www.javaboy.org/springsecurity/">江南一点雨</a>，这篇博客也是看了松哥文章后的一次总结。</p>
+<hr>
+<h1 id="一、简述"><a href="#一、简述" class="headerlink" title="一、简述"></a>一、简述</h1><p>SpringSecurity 是一个权限管理框架，包括验证用户的密码是否正确，用户的角色是普通用户还是管理员，某项操作是否得到授权等，框架的作用就是让我们少些代码少配置，缺点就是对于初学者来说就一开始比较难上手，在 springboot 中，它可以很方便和其他部分结合，只需要引入依赖就可以保护所有的接口。我们操作的主要是三个部分</p>
+<ul>
+<li><ol>
+<li>实体类 User，它就是 SpringSecurity 给我们定义的实体类<br><img src="/image/%E8%AE%B0%E5%BD%95SpringSecurity%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/1678377525493.png" alt="1678377525493"><br>从源码中我们可以看到它实现了 UserDetails 接口，但是他这里实例变量很多，我们可以自己创建实体类并实现 UserDetails 接口</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>UserDetailsService 它是用来获取用户信息，返回 UserDetails 类，我们也可以创建一个类并实现 UserDetailsService 来自定义返回的内容，例如我在项目中的实现：<br><img src="/image/%E8%AE%B0%E5%BD%95SpringSecurity%E7%9A%84%E4%B8%80%E6%AC%A1%E5%AE%9E%E8%B7%B5/1678377576565.png" alt="1678377576565"><br>在数据库中查找是否有对应 userId 的用户没有就抛出 UsernameNotFound 异常，然后在授权中加入用户的角色，最后返回 userBean。</li>
+</ol>
+</li>
+<li>3.WebSecurityConfig 配置类</li>
+</ul>
+<h1 id="二、使用步骤"><a href="#二、使用步骤" class="headerlink" title="二、使用步骤"></a>二、使用步骤</h1><h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><p>在 pom.xml 中加入以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<p>引入依赖后我们可以先直接运行试一下</p>
+<h2 id="2-读入数据"><a href="#2-读入数据" class="headerlink" title="2.读入数据"></a>2.读入数据</h2><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -207,7 +215,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AE%80%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">一、简述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.</span> <span class="toc-text">二、使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">3.1.</span> <span class="toc-text">1.引入依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AF%BB%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.</span> <span class="toc-text">2.读入数据</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
             

@@ -5,12 +5,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title>集合类 - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="[Toc]
+
+一、内容整理ArrayList底层原理及构造函数相关ArrayList 底层维护一个数组 elementData，共有三个构造函数
+
+无参构造：将一个空数组赋值给 elementDat,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +61,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle">集合类</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,16 +93,16 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/collection/" title="集合类" class="">集合类</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    2.7k
                 </span>
                 
                 
@@ -136,20 +140,23 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+            <p>[Toc]</p>
+<hr>
+<h1 id="一、内容整理"><a href="#一、内容整理" class="headerlink" title="一、内容整理"></a>一、内容整理</h1><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h4 id="底层原理及构造函数相关"><a href="#底层原理及构造函数相关" class="headerlink" title="底层原理及构造函数相关"></a>底层原理及构造函数相关</h4><p>ArrayList 底层维护一个数组 elementData，共有三个构造函数</p>
+<ul>
+<li>无参构造：将一个空数组赋值给 elementData</li>
+<li>参数 int initialCapacity：初始化手动指定数组长度，小于 0 抛出异常，等于 0 将 elementData 赋值为空数组，大于 0 赋值为指定长度的数组</li>
+<li>参数 Collection&lt;? extends E&gt; c：将 c 转化为数组后更具情况赋值</li>
+</ul>
+<p>在增加元素时，首先会判断当前数组的空间是否足够，如果不够，调用 grow 方法需要扩容为原大小的 1.5 倍，然后再将元素存储到数组中 size 的位置中</p>
+<h4 id="如何实现数组和-List-之间的转换"><a href="#如何实现数组和-List-之间的转换" class="headerlink" title="如何实现数组和 List 之间的转换"></a>如何实现数组和 List 之间的转换</h4><p>List 转数组，调用 List 的 toArray 方法，更改数组，list 不会变，因为是将数据拷贝到数组<br>数组转 List，工具类 Arrays 的 asList 方法（注意：返回的 ArrayList 不能操作，因为返回的是 Arrays 内部的类，不是常见的那个），更改数组，list 会变，因为底层只是将数组的地址赋给了 ArrayList 中的数组</p>
+<h4 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h4><p>ArrayList 底层为数组，LinkedList 底层为链表<br>访问元素时，ArrayList 的时间复杂度为 O(1)，链表为 O(n)<br>LinkedList 在头尾增加或删除时间复杂度为 O(1)，其他部分需要遍历链表时间复杂度为 O(n)<br>ArrayList 在后面增加元素时间复杂度为 O(1)，其他部分需要时间复杂度为 O(n)</p>
+<p>链表占用的空间会大一些，因为还需要存储两个指针</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h4 id="HashMap-的实现原理"><a href="#HashMap-的实现原理" class="headerlink" title="HashMap 的实现原理"></a>HashMap 的实现原理</h4><p>根据 key 计算出 hash 值得到一个索引的位置，然后将元素放置到对应的位置，如果存在元素就将元素挂载到已有元素的下方，变成一个双向链表，当链表长度大于 8，数组长度大于 64 时，会将对应索引位置的链表转换成红黑树</p>
+<h4 id="put-方法的具体流程"><a href="#put-方法的具体流程" class="headerlink" title="put 方法的具体流程"></a>put 方法的具体流程</h4><p>首先判断当前的数组是否为空，不充足则先扩容，然后再计算 key 的索引值，再查看索引位置是否有元素，已经存在元素则比较索引位置值的 key 和插入数据的 key 是否相同，相同就直接更新，不相同判断是否为红黑树，不是红黑树那就是链表，随后遍历链表，如果存在相同的 key 则更新，遍历完还没有相同的，直接在尾部插入，判断长度是否大于 8，考虑是否需要转化成红黑树，如果是红黑树，则直接执行红黑树的插入方法，插入完成后判断++size 和四分之三数组长度的大小，大于则需要扩容</p>
+<h4 id="HashMap-的扩容机制"><a href="#HashMap-的扩容机制" class="headerlink" title="HashMap 的扩容机制"></a>HashMap 的扩容机制</h4><p>首先判断是否大于 0，否则直接设置数组容量为 16，阈值为 12 并且新建数组，如果大于 0，则创建值为现在长度的两倍的变量作为新数组的长度，并且创建一个新数组，之后需要遍历数组，如果只有下标位置一个元素就直接放入新数组的对应位置，对应位置由索引模新数组长度计算得到，如果下标位置之后还有元素再判断是否为红黑树，是红黑树则直接添加红黑树，不是红黑树，那么说明是链表，需要遍历链表，对链表的元素做拆分的操作，链表元素的 hash 值模老数组的长度，等于 0 则直接添加到新数组相同下标，其他情况添加到新数组中下标为下标值加上老数组的长度</p>
+<h4 id="HashMap-的寻址算法和数组长度为什么是-2-的-n-次幂"><a href="#HashMap-的寻址算法和数组长度为什么是-2-的-n-次幂" class="headerlink" title="HashMap 的寻址算法和数组长度为什么是 2 的 n 次幂"></a>HashMap 的寻址算法和数组长度为什么是 2 的 n 次幂</h4><p>因为一个值模 2 的 n 次幂可以转换成（值-1）&amp;2 的 n 次幂<br>便于扩容时对 hash 值进行计算</p>
+<h1 id="二、面试题"><a href="#二、面试题" class="headerlink" title="二、面试题"></a>二、面试题</h1>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -207,7 +214,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%85%E5%AE%B9%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">一、内容整理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap"><span class="toc-number">1.2.</span> <span class="toc-text">HashMap</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">二、面试题</span></a></li></ol>
                 </div>
             </div>
             

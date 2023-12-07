@@ -5,12 +5,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello World - 铛铛</title>
+    <title> - 铛铛</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any pr,"> 
+    <meta name="description" content="每日报表文档涉及到的表格
+杭州支队巡检2.0.xlsx中每日巡检表：卡口相机点位的信息，前几列为具体信息，最后面列名是日期的是每天的在线状况。
+每日外场点位.xlsx：每天离线卡口的信息，每天早间巡,"> 
     <meta name="author" content="孙冬冬"> 
     <link rel="alternative" href="atom.xml" title="铛铛" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -57,7 +59,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="http://example.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Hello World</h3>
+        <h3 class="subtitle"></h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -89,22 +91,22 @@
                 
                 <a href="javascript:;"><b>「 </b>文章<b> 」</b></a>
                 
-                十二月 07, 2023
+                十二月 08, 2023
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2023/12/07/hello-world/" title="Hello World" class="">Hello World</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2023/12/08/%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" title="Untitled" class="">Untitled</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.2k
+                    5.4k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -136,19 +138,42 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <h1 id="每日报表文档"><a href="#每日报表文档" class="headerlink" title="每日报表文档"></a>每日报表文档</h1><h2 id="涉及到的表格"><a href="#涉及到的表格" class="headerlink" title="涉及到的表格"></a>涉及到的表格</h2><ol>
+<li><code>杭州支队巡检2.0.xlsx</code>中<code>每日巡检表</code>：卡口相机点位的信息，前几列为具体信息，最后面列名是日期的是每天的在线状况。</li>
+<li><code>每日外场点位.xlsx</code>：每天离线卡口的信息，每天早间巡检时将当天离线的卡口复制到此表</li>
+<li><code>外场维修台账.xlsx</code>：卡口相机的离线和恢复情况，每日巡检时根据当天卡口相机的变化情况到该表中添加或更新</li>
+<li><code>[当天日期]运维日报表.xlsx</code>：主要制作的报表，该文件需要复制前一天的并重命名，以下是对每个表的说明：<br>（1）卡口：卡口相机的在线率等信息，全表根据公式由<code>故障相机</code>表中的数据计算得到，不需要修改<br>（2）监控：监控的在线情况等信息，全表除所属道路部分的当日故障数需要手动统计外，都由<code>离线监控清单</code>表数据计算得到，不需要修改<br>（3）离线监控清单：离线监控清单，为了方便手动统计<code>监控</code>表中的离线数通常在最后一列加上监控所在的高速（这一列只是为报表制作人员提供便利，不作为报表内容）<br>（4）故障相机：当天离线的卡口<br>（5）完好率抽查相机：抽查当天相机拍摄效果的情况<br>（6）总表：全表使用公式自动计算得到，不需要修改<br>（7）Sheet1：由<code>故障相机</code>和<code>离线监控清单</code>表复制上下拼接得到</li>
+<li><code>[当天日期]运维日报表.word</code>：主要制作的文档，该文件需要复制前一天的并重命名，主要包含<code>[当天日期]运维日报表.xlsx</code>中的几张表和离线情况、抽查监控拍摄不清晰的截图</li>
+</ol>
+<h2 id="需要使用的工具"><a href="#需要使用的工具" class="headerlink" title="需要使用的工具"></a>需要使用的工具</h2><ol>
+<li>WPS Office：用于编辑 Excel 和 Word</li>
+<li>PingInfoView：群 Ping 软件，测试卡口 IP 能否连通</li>
+<li>Chrome：访问收藏栏中的<code>浙江省高速交警……</code>，用于抽查相机拍摄效果</li>
+<li>InfovisionSMAG-HTPC（高速交通安全检测与治理平台）：查看监控的离线情况</li>
+</ol>
+<blockquote>
+<p>注意：3 中的网页和 4 中 APP 界面相似，但功能不同，需要注意区分</p>
+</blockquote>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ol>
+<li>卡口离线：群 Ping 软件中经过多轮（十轮以上）后，失败率为 100%的</li>
+<li>卡口丢包严重：连续多个 IP 失败率接近 100%，将这一批 IP 的相机（相机名称通常非常相似）都视为丢包严重</li>
+</ol>
+<h2 id="工作内容"><a href="#工作内容" class="headerlink" title="工作内容"></a>工作内容</h2><ol>
+<li><p>早间巡检：巡检卡口，找出离线的卡口<br>1.1 进入<code>杭州支队巡检2.0.xlsx</code>，去掉所有筛选条件，复制昨天的在线情况到表格最右边，并重命名为今天<br>1.2 依次筛选出每个大队的数据并复制到群 Ping 软件并执行<br>1.3 Ping 过多轮等到每个 IP 的失败率相对稳定后，将每个 IP 的在线情况和表中的昨日的在线情况做比较，根据<code>卡口离线</code>判断离线情况，发现昨天离线但今天在线的和今天新增离线的需要在<code>杭州支队巡检2.0.xlsx</code>今日在线情况中更改。<br>1.4 筛选出今天离线的相机，将筛选结果中<code>[大队，新公里桩，密码，IP]</code>这几个字段复制到<code>每日外场点位.xlsx</code>，此时可以再复制今日离线 IP 到群 Ping 中检查是否有误。<br>1.5 把<code>每日外场点位.xlsx</code>复制到一个<code>金属外壳，盖口有红线，印有thinkplus</code>的 U 盘中，覆盖 U 盘原有文件，把文件发给刘炳。</p>
+<!--</li>
+<li><p>填写卡口的修复和新增离线信息<br>2.1 进入<code>杭州支队巡检2.0.xlsx</code><br>2.2 筛选今天修好的（筛选昨日是离线，今日是 ✔ 的），到<code>外场维修台账.xlsx</code>中查找修复的点位名称，将恢复时间设置为今天，故障原因和修复经过询问炳哥。<br>2.3 筛选今天新坏的（筛选昨日是 ✔，今日是离线的），将筛选结果复制到<code>外场维修台账.xlsx</code>的最下方，掉线时间填写为今日。 –&gt;</p>
+</li>
+<li><p>完好率抽查相机（主要检查相机在夜间能否拍摄清楚车辆车牌）<br>2.1 进入<code>[今日日期]运维日报表.xlsx</code>中的<code>完好率抽查相机</code>表，删除抽查设备名称和抓拍效果这两列<br>2.2 在 Chrome 浏览器中打开<code>高速交通安全监测与治理平台</code>（通过点击浏览器收藏夹最后一个进入网页）<br>2.3 打开在网页中的<code>车辆检索模块</code>中的<code>正常车辆查询</code>功能，筛选时间段为自定义，时间设置为当天凌晨的时间段<br>2.4 点击选择范围，在树选择中进入<code>杭州市&gt;高速卡口</code><br>2.5 根据<code>完好率抽查相机</code>表中每个大队需要抽查的数量，在树选择中打开对应大队，随机选择一个相机点位并查询（若显示没有符合条件的数据，则需要重新选择相机），查看当前相机拍摄的照片中车牌，若无法分辨，需要将浏览器最大化并且截全屏（方便后续排版和证明相机的抽查是今天做的），将截屏粘贴到<code>[今日日期]运维日报表.word</code>中<code>三、附图&gt;2.抓拍效果图片</code>对应大队的部分，并填写 excel 中的抓拍效果为<code>夜间拍摄车牌看不清</code>。</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">A(在Chrome中打开高速交通安全监测与治理平台) --&gt; B(选择`车辆检索模块`中的`正常车辆查询`功能)</span><br><span class="line">B --&gt; C(筛选时间段为自定义，时间设置为当天凌晨的时间段)</span><br><span class="line">C --&gt; D(点击选择范围，在树选择中进入`杭州市&gt;高速卡口`)</span><br><span class="line">D --&gt; E(进入运维日报表中的`完好率抽查相机`表)</span><br><span class="line">E --&gt; F(按照`完好率抽查相机`表中大队列，按照大队依次选择n个)</span><br><span class="line">F --&gt; G(随机选择相机)</span><br><span class="line">G --&gt; H(`完好率抽查相机`表中填入当前监控名)</span><br><span class="line">H --&gt; I(查看照片中车牌是否清晰)</span><br><span class="line">I -- 清晰 --&gt; G</span><br><span class="line">I -- 不清晰 --&gt; J(浏览器最大化并且截全屏\n将截屏粘贴到`运维日报表.word`中`三、附图&gt;2.抓拍效果图片`对应大队的部分)</span><br><span class="line">J --&gt; K(`完好率抽查相机`填写为`夜间拍摄车牌看不清`)</span><br><span class="line">K --&gt; G</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<ol start="3">
+<li><p>监控运维（15:30 左右做）<br>3.1 打开<code>[当天日期]运维日报表.xlsx</code>，进入工作簿<code>离线监控清单</code>，进入查看视频的软件。<br>3.2 首先检查昨日离线设备今日是否恢复（在视频软件中搜索设备名称并双击查看视频），显示取流失败说明未恢复，能正常显示视频则在<code>离线监控清单</code>中删除当前点位。<br>3.2 在视频软件中从上往下查找有离线的监控，找到灰色的监控需要双击查看是否能观看，取流失败则将该监控添加到<code>离线监控清单</code>中，同时标记大队、故障日期和所属高速（便于后续统计各高速离线数）。<br>3.3 进入<code>[今日日期]运维日报表.xlsx</code>中的<code>监控</code>表，根据<code>离线监控清单</code>中的数据统计每条高速的离线数量，我们只需要填写所属道路中的当日故障数这一列，其余都由公式计算得到。</p>
+</li>
+<li><p>检查卡口相机离线情况，完成报表（15:30 左右做）<br>5.1 再次操作<code>1.3-1.4</code>这里需要将 ping 出来有离线的结果对失败百分比降序排列，等到只有离线的为红点时截图，并放到 word 的<code>三、附图&gt;1.在线率图片中</code><br>5.2 进入<code>[今日日期]运维日报表.xlsx</code>中的<code>故障相机</code>表，根据<code>杭州支队巡检2.0.xlsx</code>中的数据，移除<code>故障相机中</code>今天修好了的，再添加中今天新增的，<code>外场维修台账.xlsx</code>中也许哟啊对应修改<br>5.3 检查<code>[今日日期]运维日报表.xlsx</code>，进入<code>卡口表</code>将卡口在线率低于 95%和完好率低于 98%的百分比 单元格标红，<code>监控</code>表也按照上述的规则标红，<code>故障相机</code>表把今天新增的标黄，<code>总表</code>更改第二行的时间，按照规则标红，<code>Sheet1</code>表只需复制表<code>故障相机</code>和<code>离线监控清单</code><br>5.4 打开<code>[今日日期]运维日报表.word</code>，更改第二行的日期，之后根据内容从<code>[今日日期]运维日报表.xlsx</code>中复制对应的内容过去。</p>
+</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -207,7 +232,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%8F%E6%97%A5%E6%8A%A5%E8%A1%A8%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">每日报表文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%89%E5%8F%8A%E5%88%B0%E7%9A%84%E8%A1%A8%E6%A0%BC"><span class="toc-number">1.1.</span> <span class="toc-text">涉及到的表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">需要使用的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-number">1.3.</span> <span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9"><span class="toc-number">1.4.</span> <span class="toc-text">工作内容</span></a></li></ol></li></ol>
                 </div>
             </div>
             
